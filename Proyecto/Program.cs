@@ -7,6 +7,7 @@ double emicion;
 int nvlProduccion;
 bool valido;
 string razon;
+string impact;
 void validacion () {
     if (clasificacion == 2)
     {
@@ -94,7 +95,18 @@ void validacion () {
         valido = true;
     }
 }
-
+string impacto(){
+    if(nvlProduccion == 3 || duracion > 120 || emicion >= 20 && emicion <= 23)
+    {
+        return "Impacto alto";
+    }else if(nvlProduccion == 2 || duracion > 60)
+    {
+        return "Impacto madio";
+    }else
+    {
+        return "Impacto bajo";
+    }
+}
 do
 {
     Console.WriteLine("Regulación de programas semanales. \n" +
@@ -133,7 +145,7 @@ do
                 validacion();
                 if(valido == true)
                 {
-                    //funcion 2 
+                   impact = impacto();
                 }
                 //funcion 3
             }else
