@@ -5,6 +5,96 @@ int duracion;
 int clasificacion;
 double emicion;
 int nvlProduccion;
+bool valido;
+string razon;
+void validacion () {
+    if (clasificacion == 2)
+    {
+        if (emicion >= 6 && emicion <= 22)
+        {
+            valido = true;
+        }
+        else
+        {
+            valido = false;
+            razon = "El horario de emicion no es acorde a su clasificación";
+        }
+    }
+    else if (clasificacion == 3)
+    {
+        if(emicion >= 22 && emicion <= 23 || emicion <= 5)
+        {
+            valido = true;
+        }
+        else
+        {
+            valido = false;
+            razon = "El horario de emicion no es acorde a su clasificación";
+        }
+    }
+    switch (contenido)
+    {
+        case 1:
+            if(duracion >= 60 && duracion <= 180)
+            {
+                valido = true;
+            }else
+            {
+                valido = false;
+                razon = "La duración no está en el rango permitido para el contenido que ofrece";
+            }
+            break;
+        case 2:
+            if (duracion >= 20 && duracion <= 90)
+            {
+                valido = true;
+            }
+            else
+            {
+                valido = false;
+                razon = "La duración no está en el rango permitido para el contenido que ofrece";
+            }
+            break;
+        case 3:
+            if (duracion >= 30 && duracion <= 120)
+            {
+                valido = true;
+            }
+            else
+            {
+                valido = false;
+                razon = "La duración no está en el rango permitido para el contenido que ofrece";
+            }
+            break;
+        case 4:
+            if (duracion >= 30 && duracion <= 240)
+            {
+                valido = true;
+            }
+            else
+            {
+                valido = false;
+                razon = "La duración no está en el rango permitido para el contenido que ofrece";
+            }
+            break;
+    }
+    if(nvlProduccion == 1)
+    {
+        if(clasificacion < 3)
+        {
+            valido = true;
+        }else
+        {
+            valido = false;
+            razon = "La producción no cumple con los estandares para su clasificación";
+        }
+    }
+    else
+    {
+        valido = true;
+    }
+}
+
 do
 {
     Console.WriteLine("Regulación de programas semanales. \n" +
@@ -40,7 +130,12 @@ do
             nvlProduccion = int.Parse(Console.ReadLine());
             if(contenido > 0 && contenido < 5 && duracion > 0 && clasificacion > 0 && clasificacion < 4 && emicion > 0 && emicion < 24 &&  nvlProduccion > 0 && nvlProduccion < 4)
             {
-                Console.WriteLine("Provando verificacion");
+                validacion();
+                if(valido == true)
+                {
+                    //funcion 2 
+                }
+                //funcion 3
             }else
             {
                 Console.WriteLine("Una o más respuestas son invalidas, verifique nuevamente");
