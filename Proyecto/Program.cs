@@ -1,13 +1,17 @@
 ﻿//Inicio, creacion del menu
 int opcion;
-int contenido;
-int duracion;
-int clasificacion;
-double emicion;
-int nvlProduccion;
+int contenido = -11;
+int duracion = -1;
+int clasificacion = -1; 
+double emicion = -1;
+int nvlProduccion = -1;
 bool valido;
 string razon;
 string impact;
+int publicado = 0;
+int rechazados = 0;
+int revisando = 0;
+int ingresados = 0;
 void validacion () {
     if (clasificacion == 2)
     {
@@ -101,10 +105,21 @@ string impacto(){
         return "Impacto alto";
     }else if(nvlProduccion == 2 || duracion > 60)
     {
-        return "Impacto madio";
+        return "Impacto medio";
     }else
     {
         return "Impacto bajo";
+    }
+}
+void decicion()
+{
+    if(valido == true && impact == "Impacto bajo" || impact == "Impacto medio")
+    {
+        publicado++;
+        Console.WriteLine("Publicado");
+    }else if(valido == true  )
+    {
+
     }
 }
 do
@@ -120,38 +135,33 @@ do
     switch (opcion)
     {
         case 1:
-            Console.WriteLine("Ingrese el tipo de contenido: \n" +
-                "1)Pelicula \n" +
-                "2)Serie \n" +
-                "3)Documental \n" +
-                "4)Evento en vivo_");
-            contenido = int.Parse(Console.ReadLine());
-            Console.WriteLine("Ingrese la duración en minutos_");
-            duracion = int.Parse(Console.ReadLine());
-            Console.WriteLine("Ingrese la clasificación: \n" +
-                "1)Todo publico \n" +
-                "2)+13 \n" +
-                "3)+18_");
-            clasificacion = int.Parse(Console.ReadLine());
-            Console.WriteLine("Ingrese la hora en la que se emitira el programa_");
-            emicion = double.Parse(Console.ReadLine());
-            Console.WriteLine("Ingrese el nivel de producción: \n" +
-                "1)Bajo \n" +
-                "2)Medio \n" +
-                "3)Alto_");
-            nvlProduccion = int.Parse(Console.ReadLine());
-            if(contenido > 0 && contenido < 5 && duracion > 0 && clasificacion > 0 && clasificacion < 4 && emicion > 0 && emicion < 24 &&  nvlProduccion > 0 && nvlProduccion < 4)
+            while (contenido < 0 || contenido > 4 && duracion < 0 && clasificacion < 0 || clasificacion > 3 && emicion < 0 || emicion > 23 && nvlProduccion < 0 || nvlProduccion > 3) {
+                Console.WriteLine("Ingrese el tipo de contenido: \n" +
+                    "1)Pelicula \n" +
+                    "2)Serie \n" +
+                    "3)Documental \n" +
+                    "4)Evento en vivo_");
+                contenido = int.Parse(Console.ReadLine());
+                Console.WriteLine("Ingrese la duración en minutos_");
+                duracion = int.Parse(Console.ReadLine());
+                Console.WriteLine("Ingrese la clasificación: \n" +
+                    "1)Todo publico \n" +
+                    "2)+13 \n" +
+                    "3)+18_");
+                clasificacion = int.Parse(Console.ReadLine());
+                Console.WriteLine("Ingrese la hora en la que se emitira el programa_");
+                emicion = double.Parse(Console.ReadLine());
+                Console.WriteLine("Ingrese el nivel de producción: \n" +
+                    "1)Bajo \n" +
+                    "2)Medio \n" +
+                    "3)Alto_");
+                nvlProduccion = int.Parse(Console.ReadLine()); }
+            validacion();
+            if(valido == true)
             {
-                validacion();
-                if(valido == true)
-                {
-                   impact = impacto();
-                }
-                //funcion 3
-            }else
-            {
-                Console.WriteLine("Una o más respuestas son invalidas, verifique nuevamente");
+                impact = impacto();
             }
+
             break;
         case 2:
             break;
