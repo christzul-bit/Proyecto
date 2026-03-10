@@ -167,6 +167,7 @@ do
     switch (opcion)
     {
         case 1:
+            ingresados++;
             reinicio();
             while (contenido < 0 || contenido > 4 && duracion < 0 && clasificacion < 0 || clasificacion > 3 && emicion < 0 || emicion > 23 && nvlProduccion < 0 || nvlProduccion > 3) {
                 Console.WriteLine("Ingrese el tipo de contenido: \n" +
@@ -197,6 +198,22 @@ do
             decicion();
             break;
         case 2:
+            Console.WriteLine("Reglas de evaluación");
+            Console.WriteLine();
+            Console.WriteLine("REGLA DE CLASIFICACIÓN DE HORARIOS \n" +
+                "Clasificación: para todo publico, tiene libertad de horario \n" +
+                "Clasificación: +13, solo tiene habilitado el horario de 6 a 22 horas \n" +
+                "Clasificación: +18, solo tiene habilirado el horario de 22 a 5 horas");
+            Console.WriteLine();
+            Console.WriteLine("REGLA DE DURACIÓN POR TIPO \n" +
+                "Películas: duración permitida entre 60 a 180 minutos \n" +
+                "Series: duración permitida entre 20 a 90 minutos \n" +
+                "Documentales: duración permitida entre 30 a 120 minutos \n" +
+                "Evento en vivo: duración permitida entre 30 a 240 minutos");
+            Console.WriteLine();
+            Console.WriteLine("REGLA DE PRODUCCIÓN \n" +
+                "Producción baja: valido solo para, todo publico y +13 \n" +
+                "Producción alta y media: valida para cualquier clasificación");
             break;
         case 3:
             break;
