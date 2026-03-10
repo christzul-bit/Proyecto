@@ -117,9 +117,19 @@ void decicion()
     {
         publicado++;
         Console.WriteLine("Publicado");
-    }else if(valido == true  )
+    }else if(valido == true && emicion > 22)
     {
-
+        publicado++;
+        Console.WriteLine("Publicado, pero ajustar la hora de emicion 2 horas antes");
+    }else if(valido == true && impact == "Impacto alto")
+    {
+        revisando++;
+        Console.WriteLine("Enviado a revición");
+    }
+    else
+    {
+        rechazados++;
+        Console.WriteLine($"Rechazado por: {razon}");
     }
 }
 do
