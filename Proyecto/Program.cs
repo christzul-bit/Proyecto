@@ -1,23 +1,24 @@
 ﻿//Inicio, creacion del menu
 int opcion;
-int contenido = -11;
+int contenido = -1;
 int duracion = -1;
 int clasificacion = -1; 
 double emicion = -1;
 int nvlProduccion = -1;
-bool valido;
-string razon;
-string impact;
+bool valido = false;
+string razon = "";
+string impact = "";
 int publicado = 0;
 int rechazados = 0;
 int revisando = 0;
 int ingresados = 0;
-void validacion () {
+void validacion1 ()
+{
     if (clasificacion == 2)
     {
         if (emicion >= 6 && emicion <= 22)
         {
-            valido = true;
+            validacion2();
         }
         else
         {
@@ -27,9 +28,9 @@ void validacion () {
     }
     else if (clasificacion == 3)
     {
-        if(emicion >= 22 && emicion <= 23 || emicion <= 5)
+        if (emicion >= 22 && emicion <= 23 || emicion <= 5)
         {
-            valido = true;
+            validacion2();
         }
         else
         {
@@ -37,58 +38,71 @@ void validacion () {
             razon = "El horario de emicion no es acorde a su clasificación";
         }
     }
-    switch (contenido)
+    else
     {
-        case 1:
-            if(duracion >= 60 && duracion <= 180)
-            {
-                valido = true;
-            }else
-            {
-                valido = false;
-                razon = "La duración no está en el rango permitido para el contenido que ofrece";
-            }
-            break;
-        case 2:
-            if (duracion >= 20 && duracion <= 90)
-            {
-                valido = true;
-            }
-            else
-            {
-                valido = false;
-                razon = "La duración no está en el rango permitido para el contenido que ofrece";
-            }
-            break;
-        case 3:
-            if (duracion >= 30 && duracion <= 120)
-            {
-                valido = true;
-            }
-            else
-            {
-                valido = false;
-                razon = "La duración no está en el rango permitido para el contenido que ofrece";
-            }
-            break;
-        case 4:
-            if (duracion >= 30 && duracion <= 240)
-            {
-                valido = true;
-            }
-            else
-            {
-                valido = false;
-                razon = "La duración no está en el rango permitido para el contenido que ofrece";
-            }
-            break;
+        validacion2();
     }
-    if(nvlProduccion == 1)
+}
+void validacion2()
+{
+    if (contenido == 1)
     {
-        if(clasificacion < 3)
+        if (duracion >= 60 && duracion <= 180)
+        {
+            validacion3();
+        }
+        else
+        {
+            valido = false;
+            razon = "La duración no está en el rango permitido para el contenido que ofrece";
+        }
+    }
+    else if (contenido == 2)
+    {
+        if (duracion >= 20 && duracion <= 90)
+        {
+            validacion3();
+        }
+        else
+        {
+            valido = false;
+            razon = "La duración no está en el rango permitido para el contenido que ofrece";
+        }
+    }
+    else if (contenido == 3)
+    {
+        if (duracion >= 30 && duracion <= 120)
+        {
+            validacion3();
+        }
+        else
+        {
+            valido = false;
+            razon = "La duración no está en el rango permitido para el contenido que ofrece";
+        }
+    }
+    else if (contenido == 4)
+    {
+        if (duracion >= 30 && duracion <= 240)
+        {
+            validacion3();
+        }
+        else
+        {
+            valido = false;
+            razon = "La duración no está en el rango permitido para el contenido que ofrece";
+        }
+    }
+}
+void validacion3()
+{
+    if (nvlProduccion == 1)
+    {
+        if (clasificacion < 3)
         {
             valido = true;
-        }else
+        }
+        else
         {
             valido = false;
             razon = "La producción no cumple con los estandares para su clasificación";
@@ -132,6 +146,14 @@ void decicion()
         Console.WriteLine($"Rechazado por: {razon}");
     }
 }
+void reinicio()
+{
+    contenido = -1;
+    duracion = -1;
+    clasificacion = -1;
+    emicion = -1;
+    nvlProduccion = -1;
+}
 do
 {
     Console.WriteLine("Regulación de programas semanales. \n" +
@@ -145,6 +167,7 @@ do
     switch (opcion)
     {
         case 1:
+            reinicio();
             while (contenido < 0 || contenido > 4 && duracion < 0 && clasificacion < 0 || clasificacion > 3 && emicion < 0 || emicion > 23 && nvlProduccion < 0 || nvlProduccion > 3) {
                 Console.WriteLine("Ingrese el tipo de contenido: \n" +
                     "1)Pelicula \n" +
@@ -166,12 +189,12 @@ do
                     "2)Medio \n" +
                     "3)Alto_");
                 nvlProduccion = int.Parse(Console.ReadLine()); }
-            validacion();
+            validacion1();
             if(valido == true)
             {
                 impact = impacto();
             }
-
+            decicion();
             break;
         case 2:
             break;
