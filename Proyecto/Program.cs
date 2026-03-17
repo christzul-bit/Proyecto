@@ -12,6 +12,10 @@ int publicado = 0;
 int rechazados = 0;
 int revisando = 0;
 int ingresados = 0;
+int Imalto = 0;
+int Immedio = 0;
+int Imbajo = 0;
+int predom = 0;
 void validacion1 ()
 {
     if (clasificacion == 2)
@@ -154,6 +158,34 @@ void reinicio()
     emicion = -1;
     nvlProduccion = -1;
 }
+void ContadorPre()
+{
+    if(impact == "Impacto alto")
+    {
+        Imalto++;
+    }else if(impact == "Impacto medio")
+    {
+        Immedio++;
+    }
+    else
+    {
+        Imbajo++;
+    }
+}
+void Predominante()
+{
+    if(Imalto > Immedio)
+    {
+        predom = Imalto;
+    }else if(Imalto < Immedio)
+    {
+        predom = Immedio;
+    }
+    if (predom < Imbajo)
+    {
+        predom = Imbajo;
+    }
+}
 do
 {
     Console.WriteLine("Regulación de programas semanales. \n" +
@@ -196,6 +228,7 @@ do
                 impact = impacto();
             }
             decicion();
+            ContadorPre();
             break;
         case 2:
             Console.WriteLine("Reglas de evaluación");
@@ -216,6 +249,13 @@ do
                 "Producción alta y media: valida para cualquier clasificación");
             break;
         case 3:
+            Predominante();
+            Console.WriteLine($"Total evaluados: {ingresados} \n" +
+                $"Total publicados: {publicado} \n" +
+                $"Total rechasados: {rechazados} \n" +
+                $"Total en revision: {revisando} \n" +
+                $"Impacto predominante: {predom}\n" +
+                $"Porcentaje de aprobación: {(publicado / ingresados) * 100}");
             break;
         case 4:
             break;
@@ -223,7 +263,7 @@ do
             break;
         default: break;
     }
-    Console.WriteLine("Precione cualquier tecla para continuar");
+    Console.WriteLine("\n Precione cualquier tecla para continuar");
     Console.ReadLine();
     Console.Clear();
 } while (opcion != 5);
