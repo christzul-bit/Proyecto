@@ -1,5 +1,4 @@
-﻿//Inicio, creacion del menu
-int opcion;
+﻿int opcion;
 int contenido = -1;
 int duracion = -1;
 int clasificacion = -1; 
@@ -186,6 +185,24 @@ void Predominante()
         predom = Imbajo;
     }
 }
+void ReinicioTotal() {
+    contenido = -1;
+    duracion = -1;
+    clasificacion = -1;
+    emicion = -1;
+    nvlProduccion = -1;
+    valido = false;
+    razon = "";
+    impact = "";
+    publicado = 0;
+    rechazados = 0;
+    revisando = 0;
+    ingresados = 0;
+    Imalto = 0;
+    Immedio = 0;
+    Imbajo = 0;
+    predom = 0;
+}
 do
 {
     Console.WriteLine("Regulación de programas semanales. \n" +
@@ -258,10 +275,17 @@ do
                 $"Porcentaje de aprobación: {(publicado / ingresados) * 100}");
             break;
         case 4:
+            ReinicioTotal();
+            Console.WriteLine("Valores reiniciados");
             break;
         case 5:
+            Console.WriteLine("Resumen final");
+            Console.WriteLine($"Total evaluados: {ingresados} \n" +
+                $"Total publicados: {publicado} \n" +
+                $"Total rechasados: {rechazados} \n" +
+                $"Total en revision: {revisando} \n");
             break;
-        default: break;
+        default: Console.WriteLine("Opcion invalida"); break;
     }
     Console.WriteLine("\n Precione cualquier tecla para continuar");
     Console.ReadLine();
