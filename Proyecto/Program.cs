@@ -1,4 +1,4 @@
-﻿int opcion;
+﻿int opcion = -1;
 int contenido = -1;
 int duracion = -1;
 int clasificacion = -1; 
@@ -15,6 +15,9 @@ int Imalto = 0;
 int Immedio = 0;
 int Imbajo = 0;
 int predom = 0;
+int cant;
+double cantb;
+bool seguro;
 void validacion1 ()
 {
     if (clasificacion == 2)
@@ -203,91 +206,161 @@ void ReinicioTotal() {
     Imbajo = 0;
     predom = 0;
 }
-do
+void Verificacion()
 {
-    Console.WriteLine("Regulación de programas semanales. \n" +
-        "Seleccione una opción: \n" +
-        "1)Evaluar nuevo contenido \n" +
-        "2)Mostrar las reglas del sistema \n" +
-        "3)Mostrar estadísticas de la seción \n" +
-        "4)Reiniciar valores \n" +
-        "5)Salir_");
-    opcion = int.Parse(Console.ReadLine());
-    switch (opcion)
+    bool verificado = int.TryParse(Console.ReadLine(), out cant);
+    if (verificado)
     {
-        case 1:
-            ingresados++;
-            reinicio();
-            while (contenido < 0 || contenido > 4 && duracion < 0 && clasificacion < 0 || clasificacion > 3 && emicion < 0 || emicion > 23 && nvlProduccion < 0 || nvlProduccion > 3) {
-                Console.WriteLine("Ingrese el tipo de contenido: \n" +
-                    "1)Pelicula \n" +
-                    "2)Serie \n" +
-                    "3)Documental \n" +
-                    "4)Evento en vivo_");
-                contenido = int.Parse(Console.ReadLine());
-                Console.WriteLine("Ingrese la duración en minutos_");
-                duracion = int.Parse(Console.ReadLine());
-                Console.WriteLine("Ingrese la clasificación: \n" +
-                    "1)Todo publico \n" +
-                    "2)+13 \n" +
-                    "3)+18_");
-                clasificacion = int.Parse(Console.ReadLine());
-                Console.WriteLine("Ingrese la hora en la que se emitira el programa_");
-                emicion = double.Parse(Console.ReadLine());
-                Console.WriteLine("Ingrese el nivel de producción: \n" +
-                    "1)Bajo \n" +
-                    "2)Medio \n" +
-                    "3)Alto_");
-                nvlProduccion = int.Parse(Console.ReadLine()); }
-            validacion1();
-            if(valido == true)
-            {
-                impact = impacto();
-            }
-            decicion();
-            ContadorPre();
-            break;
-        case 2:
-            Console.WriteLine("Reglas de evaluación");
-            Console.WriteLine();
-            Console.WriteLine("REGLA DE CLASIFICACIÓN DE HORARIOS \n" +
-                "Clasificación: para todo publico, tiene libertad de horario \n" +
-                "Clasificación: +13, solo tiene habilitado el horario de 6 a 22 horas \n" +
-                "Clasificación: +18, solo tiene habilirado el horario de 22 a 5 horas");
-            Console.WriteLine();
-            Console.WriteLine("REGLA DE DURACIÓN POR TIPO \n" +
-                "Películas: duración permitida entre 60 a 180 minutos \n" +
-                "Series: duración permitida entre 20 a 90 minutos \n" +
-                "Documentales: duración permitida entre 30 a 120 minutos \n" +
-                "Evento en vivo: duración permitida entre 30 a 240 minutos");
-            Console.WriteLine();
-            Console.WriteLine("REGLA DE PRODUCCIÓN \n" +
-                "Producción baja: valido solo para, todo publico y +13 \n" +
-                "Producción alta y media: valida para cualquier clasificación");
-            break;
-        case 3:
-            Predominante();
-            Console.WriteLine($"Total evaluados: {ingresados} \n" +
-                $"Total publicados: {publicado} \n" +
-                $"Total rechasados: {rechazados} \n" +
-                $"Total en revision: {revisando} \n" +
-                $"Impacto predominante: {predom}\n" +
-                $"Porcentaje de aprobación: {(publicado / ingresados) * 100}");
-            break;
-        case 4:
-            ReinicioTotal();
-            Console.WriteLine("Valores reiniciados");
-            break;
-        case 5:
-            Console.WriteLine("Resumen final");
-            Console.WriteLine($"Total evaluados: {ingresados} \n" +
-                $"Total publicados: {publicado} \n" +
-                $"Total rechasados: {rechazados} \n" +
-                $"Total en revision: {revisando} \n");
-            break;
-        default: Console.WriteLine("Opcion invalida"); break;
+        seguro = true;   
     }
-    Console.WriteLine("\n Precione cualquier tecla para continuar");
-    Console.ReadLine();
-    Console.Clear();
-} while (opcion != 5);
+    else
+    {
+        Console.WriteLine("Valor invalido");
+        seguro = false;
+    }
+}
+void VerificacionDouble()
+{
+    bool verificado = double.TryParse(Console.ReadLine(), out cantb);
+    if (verificado)
+    {
+        seguro = true;
+    }
+    else
+    {
+        Console.WriteLine("Valor invalido");
+        seguro = false;
+    }
+}
+    do
+    {
+        do
+        {
+        Console.WriteLine("Regulación de programas semanales. \n" +
+            "Seleccione una opción: \n" +
+            "1)Evaluar nuevo contenido \n" +
+            "2)Mostrar las reglas del sistema \n" +
+            "3)Mostrar estadísticas de la seción \n" +
+            "4)Reiniciar valores \n" +
+            "5)Salir_");
+        Verificacion();
+        if (seguro == true)
+        {
+            opcion = cant;
+        }
+        } while (seguro == false);
+        switch (opcion)
+        {
+            case 1:
+                ingresados++;
+                reinicio();
+                while (contenido < 0 || contenido > 4 && duracion < 0 && clasificacion < 0 || clasificacion > 3 && emicion < 0 || emicion > 23 && nvlProduccion < 0 || nvlProduccion > 3)
+                {
+                    do
+                    {
+                        Console.WriteLine("Ingrese el tipo de contenido: \n" +
+                            "1)Pelicula \n" +
+                            "2)Serie \n" +
+                            "3)Documental \n" +
+                            "4)Evento en vivo_");
+                        Verificacion();
+                        if (seguro == true)
+                        {
+                            contenido = cant;
+                        }
+                    } while (seguro == false);
+                    do
+                    {
+                        Console.WriteLine("Ingrese la duración en minutos_");
+                        Verificacion();
+                        if (seguro == true)
+                        {
+                            duracion = cant;
+                        }
+                    } while (seguro == false);
+                    do
+                    {
+                        Console.WriteLine("Ingrese la clasificación: \n" +
+                            "1)Todo publico \n" +
+                            "2)+13 \n" +
+                            "3)+18_");
+                        Verificacion();
+                        if (seguro == true)
+                        {
+                            clasificacion = cant;
+                        }
+                    } while (seguro == false);
+                    do
+                    {
+                        Console.WriteLine("Ingrese la hora en la que se emitira el programa_");
+                        VerificacionDouble();
+                        if (seguro == true)
+                        {
+                            emicion = cantb;
+                        }
+                    } while (seguro == false);
+                    do
+                    {
+                        Console.WriteLine("Ingrese el nivel de producción: \n" +
+                            "1)Bajo \n" +
+                            "2)Medio \n" +
+                            "3)Alto_");
+                        Verificacion();
+                        if (seguro == true)
+                        {
+                            nvlProduccion = cant;
+                        }
+                    } while (seguro == false);
+                }
+                validacion1();
+                if (valido == true)
+                {
+                    impact = impacto();
+                }
+                decicion();
+                ContadorPre();
+                break;
+            case 2:
+                Console.WriteLine("Reglas de evaluación");
+                Console.WriteLine();
+                Console.WriteLine("REGLA DE CLASIFICACIÓN DE HORARIOS \n" +
+                    "Clasificación: para todo publico, tiene libertad de horario \n" +
+                    "Clasificación: +13, solo tiene habilitado el horario de 6 a 22 horas \n" +
+                    "Clasificación: +18, solo tiene habilirado el horario de 22 a 5 horas");
+                Console.WriteLine();
+                Console.WriteLine("REGLA DE DURACIÓN POR TIPO \n" +
+                    "Películas: duración permitida entre 60 a 180 minutos \n" +
+                    "Series: duración permitida entre 20 a 90 minutos \n" +
+                    "Documentales: duración permitida entre 30 a 120 minutos \n" +
+                    "Evento en vivo: duración permitida entre 30 a 240 minutos");
+                Console.WriteLine();
+                Console.WriteLine("REGLA DE PRODUCCIÓN \n" +
+                    "Producción baja: valido solo para, todo publico y +13 \n" +
+                    "Producción alta y media: valida para cualquier clasificación");
+                break;
+            case 3:
+                Predominante();
+                Console.WriteLine($"Total evaluados: {ingresados} \n" +
+                    $"Total publicados: {publicado} \n" +
+                    $"Total rechasados: {rechazados} \n" +
+                    $"Total en revision: {revisando} \n" +
+                    $"Impacto predominante: {predom}\n" +
+                    $"Porcentaje de aprobación: {(publicado / ingresados) * 100}");
+                break;
+            case 4:
+                ReinicioTotal();
+                Console.WriteLine("Valores reiniciados");
+                break;
+            case 5:
+                Console.WriteLine("Resumen final");
+                Console.WriteLine($"Total evaluados: {ingresados} \n" +
+                    $"Total publicados: {publicado} \n" +
+                    $"Total rechasados: {rechazados} \n" +
+                    $"Total en revision: {revisando} \n");
+                break;
+            default: Console.WriteLine("Opcion invalida"); break;
+        }
+        Console.WriteLine("\n Precione cualquier tecla para continuar");
+        Console.ReadLine();
+        Console.Clear();
+    } while (opcion != 5);
