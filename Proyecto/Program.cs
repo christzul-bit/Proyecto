@@ -14,7 +14,7 @@ int ingresados = 0;
 int Imalto = 0;
 int Immedio = 0;
 int Imbajo = 0;
-int predom = 0;
+string predom = "";
 int cant;
 double cantb;
 bool seguro;
@@ -178,15 +178,22 @@ void Predominante()
 {
     if(Imalto > Immedio)
     {
-        predom = Imalto;
-    }else if(Imalto < Immedio)
-    {
-        predom = Immedio;
+        if(Imalto > Imbajo)
+        {
+            predom = "Impacto alto";
+        }else
+        {
+            predom = "Impacto Bajo";
+        }
+    }else {
+        if (Immedio > Imbajo) {
+            predom = "Impacto Medio";
+        }else
+        {
+            predom = "Impacto Bajo";
+        }
     }
-    if (predom < Imbajo)
-    {
-        predom = Imbajo;
-    }
+    
 }
 void ReinicioTotal() {
     contenido = -1;
@@ -204,7 +211,7 @@ void ReinicioTotal() {
     Imalto = 0;
     Immedio = 0;
     Imbajo = 0;
-    predom = 0;
+    predom = "";
 }
 void Verificacion()
 {
@@ -340,12 +347,20 @@ void VerificacionDouble()
                 break;
             case 3:
                 Predominante();
+                
                 Console.WriteLine($"Total evaluados: {ingresados} \n" +
                     $"Total publicados: {publicado} \n" +
                     $"Total rechasados: {rechazados} \n" +
                     $"Total en revision: {revisando} \n" +
-                    $"Impacto predominante: {predom}\n" +
-                    $"Porcentaje de aprobación: {(publicado / ingresados) * 100}");
+                    $"Impacto predominante: {predom}");
+                if (ingresados != 0)
+                {
+                    double porcen = publicado / ingresados;
+                    Console.WriteLine($"Porcentaje de aprobación: {porcen * 100}");
+                }else
+                {
+                    Console.WriteLine("Sin aprovados");
+                }
                 break;
             case 4:
                 ReinicioTotal();
