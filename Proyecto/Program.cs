@@ -7,10 +7,10 @@ int nvlProduccion = -1;
 bool valido = false;
 string razon = "";
 string impact = "";
-int publicado = 0;
+double publicado = 0;
 int rechazados = 0;
 int revisando = 0;
-int ingresados = 0;
+double ingresados = 0;
 int Imalto = 0;
 int Immedio = 0;
 int Imbajo = 0;
@@ -243,18 +243,18 @@ void VerificacionDouble()
     {
         do
         {
-        Console.WriteLine("Regulación de programas semanales. \n" +
-            "Seleccione una opción: \n" +
-            "1)Evaluar nuevo contenido \n" +
-            "2)Mostrar las reglas del sistema \n" +
-            "3)Mostrar estadísticas de la seción \n" +
-            "4)Reiniciar valores \n" +
-            "5)Salir_");
-        Verificacion();
-        if (seguro == true)
-        {
-            opcion = cant;
-        }
+            Console.WriteLine("Regulación de programas semanales. \n" +
+                "Seleccione una opción: \n" +
+                "1)Evaluar nuevo contenido \n" +
+                "2)Mostrar las reglas del sistema \n" +
+                "3)Mostrar estadísticas de la seción \n" +
+                "4)Reiniciar valores \n" +
+                "5)Salir_");
+            Verificacion();
+            if (seguro == true)
+            {
+                opcion = cant;
+            }
         } while (seguro == false);
         switch (opcion)
         {
@@ -265,6 +265,7 @@ void VerificacionDouble()
                 {
                     do
                     {
+                        Console.Clear();
                         Console.WriteLine("Ingrese el tipo de contenido: \n" +
                             "1)Pelicula \n" +
                             "2)Serie \n" +
@@ -274,19 +275,33 @@ void VerificacionDouble()
                         if (seguro == true)
                         {
                             contenido = cant;
+                            if(contenido < 1 || contenido > 4)
+                            {
+                                Console.WriteLine("Valor fuera del rango");
+                                seguro = false;
+                                Console.ReadKey();
+                            }
                         }
                     } while (seguro == false);
                     do
                     {
+                        Console.Clear();
                         Console.WriteLine("Ingrese la duración en minutos_");
                         Verificacion();
                         if (seguro == true)
                         {
                             duracion = cant;
+                            if(duracion < 0 || duracion > 1000)
+                            {
+                                Console.WriteLine("Duración ilogica");
+                                seguro = false;
+                                Console.ReadKey();
+                            }
                         }
                     } while (seguro == false);
                     do
                     {
+                        Console.Clear();
                         Console.WriteLine("Ingrese la clasificación: \n" +
                             "1)Todo publico \n" +
                             "2)+13 \n" +
@@ -295,19 +310,33 @@ void VerificacionDouble()
                         if (seguro == true)
                         {
                             clasificacion = cant;
+                            if(clasificacion < 1 || clasificacion > 3)
+                            {
+                                Console.WriteLine("Valor fuera del rango");
+                                seguro = false;
+                                Console.ReadKey();
+                            }
                         }
                     } while (seguro == false);
                     do
                     {
+                        Console.Clear();
                         Console.WriteLine("Ingrese la hora en la que se emitira el programa_");
                         VerificacionDouble();
                         if (seguro == true)
                         {
                             emicion = cantb;
+                            if(emicion < 0 || emicion > 23)
+                            {
+                                Console.WriteLine("Emición ilogica");
+                                seguro =false;
+                                Console.ReadKey();
+                            }
                         }
                     } while (seguro == false);
                     do
                     {
+                        Console.Clear();
                         Console.WriteLine("Ingrese el nivel de producción: \n" +
                             "1)Bajo \n" +
                             "2)Medio \n" +
@@ -316,6 +345,12 @@ void VerificacionDouble()
                         if (seguro == true)
                         {
                             nvlProduccion = cant;
+                            if(nvlProduccion < 1 ||  nvlProduccion > 3)
+                            {
+                                Console.WriteLine("Valor fuera de rango");
+                                seguro=false;
+                                Console.ReadKey();
+                            }
                         }
                     } while (seguro == false);
                 }
@@ -333,7 +368,7 @@ void VerificacionDouble()
                 Console.WriteLine("REGLA DE CLASIFICACIÓN DE HORARIOS \n" +
                     "Clasificación: para todo publico, tiene libertad de horario \n" +
                     "Clasificación: +13, solo tiene habilitado el horario de 6 a 22 horas \n" +
-                    "Clasificación: +18, solo tiene habilirado el horario de 22 a 5 horas");
+                    "Clasificación: +18, solo tiene habilitado el horario de 22 a 5 horas");
                 Console.WriteLine();
                 Console.WriteLine("REGLA DE DURACIÓN POR TIPO \n" +
                     "Películas: duración permitida entre 60 a 180 minutos \n" +
@@ -351,15 +386,16 @@ void VerificacionDouble()
                 Console.WriteLine($"Total evaluados: {ingresados} \n" +
                     $"Total publicados: {publicado} \n" +
                     $"Total rechasados: {rechazados} \n" +
-                    $"Total en revision: {revisando} \n" +
+                    $"Total en revisión: {revisando} \n" +
                     $"Impacto predominante: {predom}");
                 if (ingresados != 0)
                 {
                     double porcen = publicado / ingresados;
+                Console.WriteLine(porcen);
                     Console.WriteLine($"Porcentaje de aprobación: {porcen * 100}");
                 }else
                 {
-                    Console.WriteLine("Sin aprovados");
+                    Console.WriteLine("Sin aprobados");
                 }
                 break;
             case 4:
@@ -373,9 +409,9 @@ void VerificacionDouble()
                     $"Total rechasados: {rechazados} \n" +
                     $"Total en revision: {revisando} \n");
                 break;
-            default: Console.WriteLine("Opcion invalida"); break;
+            default: Console.WriteLine("Opción invalida"); break;
         }
-        Console.WriteLine("\n Precione cualquier tecla para continuar");
-        Console.ReadLine();
+        Console.WriteLine("\n Presione cualquier tecla para continuar");
+        Console.ReadKey();
         Console.Clear();
     } while (opcion != 5);
