@@ -132,7 +132,7 @@ string impacto(){
     }
 }
 void decicion()
-{
+{   Console.ForegroundColor = ConsoleColor.DarkGreen;
     if(valido == true && impact == "Impacto bajo" || impact == "Impacto medio")
     {
         publicado++;
@@ -148,9 +148,11 @@ void decicion()
     }
     else
     {
+        Console.ForegroundColor = ConsoleColor.DarkRed;
         rechazados++;
         Console.WriteLine($"Rechazado por: {razon}");
     }
+    Console.ResetColor();
 }
 void reinicio()
 {
@@ -222,7 +224,9 @@ void Verificacion()
     }
     else
     {
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("Valor invalido");
+        Console.ResetColor();
         seguro = false;
     }
 }
@@ -235,7 +239,9 @@ void VerificacionDouble()
     }
     else
     {
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("Valor invalido");
+        Console.ResetColor();
         seguro = false;
     }
 }
@@ -277,10 +283,15 @@ void VerificacionDouble()
                             contenido = cant;
                             if(contenido < 1 || contenido > 4)
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Valor fuera del rango");
+                                Console.ResetColor();
                                 seguro = false;
                                 Console.ReadKey();
                             }
+                        }else
+                        {
+                            Console.ReadKey();
                         }
                     } while (seguro == false);
                     do
@@ -293,10 +304,15 @@ void VerificacionDouble()
                             duracion = cant;
                             if(duracion < 0 || duracion > 1000)
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Duración ilogica");
+                                Console.ResetColor();
                                 seguro = false;
                                 Console.ReadKey();
                             }
+                        }else
+                        {
+                            Console.ReadKey();
                         }
                     } while (seguro == false);
                     do
@@ -312,10 +328,16 @@ void VerificacionDouble()
                             clasificacion = cant;
                             if(clasificacion < 1 || clasificacion > 3)
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Valor fuera del rango");
+                                Console.ResetColor();
                                 seguro = false;
                                 Console.ReadKey();
                             }
+                        }
+                        else
+                        {
+                            Console.ReadKey();
                         }
                     } while (seguro == false);
                     do
@@ -328,10 +350,16 @@ void VerificacionDouble()
                             emicion = cantb;
                             if(emicion < 0 || emicion > 23)
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Emición ilogica");
+                                Console.ResetColor();
                                 seguro =false;
                                 Console.ReadKey();
                             }
+                        }
+                        else
+                        {
+                            Console.ReadKey();
                         }
                     } while (seguro == false);
                     do
@@ -347,12 +375,18 @@ void VerificacionDouble()
                             nvlProduccion = cant;
                             if(nvlProduccion < 1 ||  nvlProduccion > 3)
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Valor fuera de rango");
+                                Console.ResetColor();
                                 seguro=false;
                                 Console.ReadKey();
                             }
                         }
-                    } while (seguro == false);
+                        else
+                        {
+                            Console.ReadKey();
+                        }
+                } while (seguro == false);
                 }
                 validacion1();
                 if (valido == true)
@@ -363,6 +397,7 @@ void VerificacionDouble()
                 ContadorPre();
                 break;
             case 2:
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Reglas de evaluación");
                 Console.WriteLine();
                 Console.WriteLine("REGLA DE CLASIFICACIÓN DE HORARIOS \n" +
@@ -379,10 +414,11 @@ void VerificacionDouble()
                 Console.WriteLine("REGLA DE PRODUCCIÓN \n" +
                     "Producción baja: valido solo para, todo publico y +13 \n" +
                     "Producción alta y media: valida para cualquier clasificación");
+                Console.ResetColor();
                 break;
             case 3:
                 Predominante();
-                
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"Total evaluados: {ingresados} \n" +
                     $"Total publicados: {publicado} \n" +
                     $"Total rechasados: {rechazados} \n" +
@@ -391,27 +427,33 @@ void VerificacionDouble()
                 if (ingresados != 0)
                 {
                     double porcen = publicado / ingresados;
-                Console.WriteLine(porcen);
                     Console.WriteLine($"Porcentaje de aprobación: {porcen * 100}");
                 }else
                 {
                     Console.WriteLine("Sin aprobados");
                 }
+                Console.ResetColor();
                 break;
             case 4:
                 ReinicioTotal();
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
                 Console.WriteLine("Valores reiniciados");
+                Console.ResetColor();
                 break;
             case 5:
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Resumen final");
                 Console.WriteLine($"Total evaluados: {ingresados} \n" +
                     $"Total publicados: {publicado} \n" +
                     $"Total rechasados: {rechazados} \n" +
                     $"Total en revision: {revisando} \n");
+                Console.ResetColor();
                 break;
-            default: Console.WriteLine("Opción invalida"); break;
+            default: Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("Opción invalida"); Console.ResetColor(); break;
         }
+        Console.ForegroundColor = ConsoleColor.DarkBlue;
         Console.WriteLine("\n Presione cualquier tecla para continuar");
+        Console.ResetColor();
         Console.ReadKey();
         Console.Clear();
     } while (opcion != 5);
