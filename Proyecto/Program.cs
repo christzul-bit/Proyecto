@@ -249,6 +249,7 @@ void VerificacionDouble()
     {
         do
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Regulación de programas semanales. \n" +
                 "Seleccione una opción: \n" +
                 "1)Evaluar nuevo contenido \n" +
@@ -256,6 +257,7 @@ void VerificacionDouble()
                 "3)Mostrar estadísticas de la seción \n" +
                 "4)Reiniciar valores \n" +
                 "5)Salir_");
+            Console.ResetColor();
             Verificacion();
             if (seguro == true)
             {
