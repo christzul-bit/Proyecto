@@ -29,7 +29,7 @@ void validacion1 ()
         else
         {
             valido = false;
-            razon = "El horario de emicion no es acorde a su clasificación";
+            razon = "El horario de emición no es acorde a su clasificación";
         }
     }
     else if (clasificacion == 3)
@@ -161,6 +161,9 @@ void reinicio()
     clasificacion = -1;
     emicion = -1;
     nvlProduccion = -1;
+    valido = false;
+    razon = "";
+    impact = "";
 }
 void ContadorPre()
 {
